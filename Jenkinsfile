@@ -8,11 +8,16 @@ pipeline{
         }
         stage('Push'){
             steps{
-                echo 'PUSH'
+                currentBuild.result = 'UNSTABLE'
             }
         }
         stage('Deploy'){
-            steps{
+            when{
+                expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
                 echo 'DEPLOY'
             }
         }
