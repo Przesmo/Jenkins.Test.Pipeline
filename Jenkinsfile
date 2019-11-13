@@ -8,7 +8,9 @@ pipeline{
         }
         stage('Push'){
             steps{
-                currentBuild.result = 'UNSTABLE'
+                expression{
+                    currentBuild.result = 'UNSTABLE'
+                }
             }
         }
         stage('Deploy'){
