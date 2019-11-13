@@ -2,8 +2,12 @@ pipeline{
     agent any
     stages{
         stage('Build'){
+            environment { 
+                TEST = 'clang'
+            }
             steps{
                 echo 'Hello from branch: ' + env.GIT_BRANCH
+                sh 'printenv'
             }
         }
         stage('Push'){
