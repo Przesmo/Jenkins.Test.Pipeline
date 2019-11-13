@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Example'){
             steps{
-                echo 'Hello Production'
+                echo 'Hello from branch' + env.GIT_BRANCH
             }
         }
     }
