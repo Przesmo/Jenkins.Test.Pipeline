@@ -1,9 +1,19 @@
 pipeline{
     agent any
     stages{
-        stage('Example'){
+        stage('Build'){
             steps{
-                echo 'Hello from branch' + env.GIT_BRANCH
+                echo 'Hello from branch: ' + env.GIT_BRANCH
+            }
+        }
+        stage('Push'){
+            steps{
+                echo 'PUSH'
+            }
+        }
+        stage('Deploy'){
+            steps{
+                echo 'DEPLOY'
             }
         }
     }
