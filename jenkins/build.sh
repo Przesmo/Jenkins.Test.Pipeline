@@ -1,0 +1,1 @@
+docker build -f Test.Api/Test.Api/Dockerfile -t my_test .

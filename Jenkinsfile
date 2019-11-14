@@ -7,7 +7,7 @@ pipeline{
             }
             steps{
                 echo 'Hello from branch: ' + env.GIT_BRANCH
-                sh 'printenv'
+                sh jenkins/build.sh
             }
         }
         stage('Push'){
