@@ -7,7 +7,7 @@ pipeline{
             }
             steps{
                 echo 'Hello from branch: ' + env.GIT_BRANCH
-                sh jenkins/build.sh
+                sh docker build -f Test.Api/Test.Api/Dockerfile -t my_test .
             }
         }
         stage('Push'){
