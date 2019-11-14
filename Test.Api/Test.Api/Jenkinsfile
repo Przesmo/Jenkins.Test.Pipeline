@@ -6,12 +6,15 @@ pipeline{
                 TEST = 'clang'
             }
             steps{
-                echo 'Hello from branch: ' + env.GIT_BRANCH
-                sh docker build -f Test.Api/Test.Api/Dockerfile -t my_test .
+               app = docker.build("psmoll/test_repository")
             }
         }
         stage('Push'){
             steps{
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                app.push("${env.BUILD_NUMBER}")
+                app.push("latest")
+                
                 expression{
                     currentBuild.result = 'UNSTABLE'
                 }
