@@ -1,10 +1,14 @@
 pipeline{
+    environment {
+    registry = "psmoll/test_repository"
+    registryCredential = ‘dockerhub’
+}
     agent any
     stages{
         stage('Build'){
             steps{
                 script{
-                app = docker.build("psmoll/test_repository")
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
         }
