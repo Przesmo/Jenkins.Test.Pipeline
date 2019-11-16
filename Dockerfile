@@ -6,13 +6,14 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
 COPY ["Test.Api/Test.Api/Test.Api.csproj", "Test.Api/"]
-RUN dotnet restore "Test.Api/Test.Api.csproj"
-COPY . .
+
+RUN dotnet restore "Test.Api/Test.Api.csproj" -r linux-musl-x64
+COPY . "Test.Api/"
 WORKDIR "/src/Test.Api"
-RUN dotnet build "Test.Api.csproj" -c Release -o /app/build
+RUN dotnet build "Test.Api.csproj" -c Release -r linux-musl-x64 -o /app/build --no-restore
 
 FROM build AS publish
-RUN dotnet publish "Test.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "Test.Api.csproj" -c Release -r linux-musl-x64 -o /app/publish --no-restore
 
 FROM base AS final
 WORKDIR /app
