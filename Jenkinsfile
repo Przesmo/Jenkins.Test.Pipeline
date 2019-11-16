@@ -1,7 +1,7 @@
 pipeline{
     environment {
     registry = "psmoll/test_repository"
-    registryCredential = ‘dockerhub’
+    registryCredential = 'dockerhub'
 }
     agent any
     stages{
