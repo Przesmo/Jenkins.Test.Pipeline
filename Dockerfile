@@ -9,7 +9,7 @@ COPY ["Test.Api/Test.Api/Test.Api.csproj", "Test.Api/"]
 RUN dotnet restore "Test.Api/Test.Api.csproj"
 COPY . .
 WORKDIR "/src/Test.Api"
-RUN dotnet build "Test.Api.csproj" -c Release -p:/app/build=out
+RUN dotnet build "Test.Api.csproj" -c Release -p:OutputPath=/app/build
 
 FROM build AS publish
 RUN dotnet publish "Test.Api.csproj" -c Release -o /app/publish
