@@ -8,12 +8,12 @@ WORKDIR /src
 COPY ["Test.Api/Test.Api/Test.Api.csproj", "Test.Api/"]
 
 RUN dotnet restore "Test.Api/Test.Api.csproj"
-COPY . "Test.Api/"
-WORKDIR "/src/Test.Api"
-RUN dotnet build "Test.Api.csproj"  -c Release -o /app/build
+COPY . .
+WORKDIR /src/Test.Api
+RUN dotnet build "Test.Api.csproj" --no-restore  -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "Test.Api.csproj"  -c Release -o /app/build
+RUN dotnet publish "Test.Api.csproj"  -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
