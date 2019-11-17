@@ -10,7 +10,7 @@ RUN dotnet restore "Test.Api/Test.Api.csproj" -r linux-musl-x64
 COPY . .
 WORKDIR "/src/Test.Api"
 
-RUN dotnet publish "Test.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "Test.Api.csproj" -c Release -r linux-musl-x64 -o out --no-restore
 
 FROM base AS final
 WORKDIR /app
